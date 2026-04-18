@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <iostream>
 
 class Movie {
 private:
@@ -7,11 +8,11 @@ private:
     std::string title;
     std::string genre;
     int         releaseYear;
-    double      totalRating;   // 누적 평점
-    int         ratingCount;   // 평점 개수
+    double      totalRating;
+    int         ratingCount;
 
 public:
-    Movie();                   // 기본 생성자
+    Movie();
     Movie(int id, const std::string& title,
           const std::string& genre, int year);
 
@@ -19,9 +20,15 @@ public:
     std::string getTitle()         const;
     std::string getGenre()         const;
     int         getReleaseYear()   const;
-    double      getAverageRating() const;  // 평균 평점 반환
+    double      getAverageRating() const;
     int         getRatingCount()   const;
 
-    void addRating(double r);    // 평점 추가
+    void addRating(double r);
     void display()         const;
+
+    bool operator==(const Movie& other) const;
+    bool operator!=(const Movie& other) const;
+    bool operator<(const Movie& other)  const;
+
+    friend std::ostream& operator<<(std::ostream& os, const Movie& m);
 };
