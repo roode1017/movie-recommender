@@ -91,6 +91,32 @@ void menuPrintUsers(UserManager& umgr) {
     umgr.printAll();
 }
 
+void menuAddRating(MovieManager& mmgr, UserManager& umgr) {
+    std::cout << "\n-- 평점 입력 --\n";
+    std::cout << "[ 사용자 목록 ]\n";
+    umgr.printAll();
+    int userId = getValidInt("  사용자 ID: ");
+
+    std::cout << "[ 영화 목록 ]\n";
+    mmgr.printAll();
+    int movieId = getValidInt("  영화 ID: ");
+
+    double score = getValidDouble("  평점 (0.0 ~ 5.0): ");
+    if (score < 0.0 || score > 5.0) {
+        std::cout << "  유효하지 않은 평점입니다 (0.0 ~ 5.0).\n";
+        return;
+    }
+    mmgr.addRatingEntry(userId, movieId, score);
+    std::cout << "  평점이 입력되었습니다.\n";
+}
+
+void menuRatingsByMovie(MovieManager& mmgr) {
+    std::cout << "\n-- 영화별 평점 보기 --\n";
+    mmgr.printAll();
+    int movieId = getValidInt("  영화 ID: ");
+    mmgr.printRatingsByMovie(movieId);
+}
+
 int main() {
     MovieManager movieMgr;
     UserManager  userMgr;
@@ -116,26 +142,33 @@ int main() {
     int choice;
     do {
         std::cout << "\n=== Movie Recommender ===\n"
+                  << "\n[ 영화 ]\n"
                   << "  1. 영화 추가\n"
-                  << "  2. 영화 검색\n"
-                  << "  3. 평점순 정렬\n"
-                  << "  4. 전체 출력\n"
+                  << "  2. 제목으로 검색\n"
+                  << "  3. 전체 목록 출력\n"
+                  << "  4. 평점순 정렬 출력\n"
+                  << "\n[ 사용자 ]\n"
                   << "  5. 사용자 추가\n"
-                  << "  6. 사용자 목록\n"
-                  << "  0. 종료\n"
-                  << "선택: ";
+                  << "  6. 사용자 목록 출력\n"
+                  << "\n[ 평점 ]\n"
+                  << "  7. 평점 입력\n"
+                  << "  8. 영화별 평점 보기\n"
+                  << "\n  0. 종료\n"
+                  << "선택 > ";
 
         choice = getValidInt("");
 
         switch (choice) {
-            case 1: menuAddMovie(movieMgr);          break;
-            case 2: menuFindMovie(movieMgr);         break;
-            case 3: menuSortAndPrint(movieMgr);      break;
-            case 4: menuPrintAll(movieMgr);          break;
-            case 5: menuAddUser(userMgr);            break;
-            case 6: menuPrintUsers(userMgr);         break;
-            case 0: std::cout << "종료합니다.\n";    break;
-            default: std::cout << "  0~6 사이의 번호를 선택하세요.\n";
+            case 1: menuAddMovie(movieMgr);                    break;
+            case 2: menuFindMovie(movieMgr);                   break;
+            case 3: menuPrintAll(movieMgr);                    break;
+            case 4: menuSortAndPrint(movieMgr);                break;
+            case 5: menuAddUser(userMgr);                      break;
+            case 6: menuPrintUsers(userMgr);                   break;
+            case 7: menuAddRating(movieMgr, userMgr);          break;
+            case 8: menuRatingsByMovie(movieMgr);              break;
+            case 0: std::cout << "종료합니다.\n";              break;
+            default: std::cout << "  0~8 사이의 번호를 선택하세요.\n";
         }
     } while (choice != 0);
 

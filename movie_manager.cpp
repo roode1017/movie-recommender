@@ -30,3 +30,33 @@ void MovieManager::printAll() const {
 int MovieManager::size() const {
     return static_cast<int>(movies.size());
 }
+
+void MovieManager::addRatingEntry(int userId, int movieId, double score) {
+    ratings.push_back(Rating(userId, movieId, score));
+    for (Movie& m : movies) {
+        if (m.getId() == movieId) {
+            m.addRating(score);
+            break;
+        }
+    }
+}
+
+void MovieManager::printRatingsByMovie(int movieId) const {
+    std::string movieTitle = "(알 수 없음)";
+    for (const Movie& m : movies) {
+        if (m.getId() == movieId) {
+            movieTitle = m.getTitle();
+            break;
+        }
+    }
+    std::cout << "  [" << movieTitle << "] 평점 목록:\n";
+    bool found = false;
+    for (const Rating& r : ratings) {
+        if (r.getMovieId() == movieId) {
+            r.display();
+            found = true;
+        }
+    }
+    if (!found)
+        std::cout << "  (등록된 평점이 없습니다)\n";
+}

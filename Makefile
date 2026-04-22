@@ -19,10 +19,10 @@ user.o: user.cpp user.h
 rating.o: rating.cpp rating.h
 	$(CXX) $(CXXFLAGS) -c $<
 
-movie_manager.o: movie_manager.cpp movie_manager.h movie.h
+movie_manager.o: movie_manager.cpp movie_manager.h movie.h rating.h manager.h
 	$(CXX) $(CXXFLAGS) -c $<
 
-user_manager.o: user_manager.cpp user_manager.h user.h
+user_manager.o: user_manager.cpp user_manager.h user.h manager.h
 	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
