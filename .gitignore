@@ -1,0 +1,6 @@
+# 컴파일 산물
+*.o
+*.i
+
+# 실행 파일
+movie_recommender

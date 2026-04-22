@@ -52,7 +52,7 @@ bool Movie::operator<(const Movie& other) const {
 }
 
 std::ostream& operator<<(std::ostream& os, const Movie& m) {
-    os << "[" << m.title << "] "
+    os << m.id << ". [" << m.title << "] "
        << m.releaseYear
        << " ★" << m.getAverageRating();
     return os;

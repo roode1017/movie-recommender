@@ -9,8 +9,9 @@ private:
     std::vector<User> users;
 
 public:
-    void  addUser(const User& user);
-    User* findByName(const std::string& name);
-    void  printAll() const override;
-    int   size() const;
+    void        addUser(const User& user);
+    User*       findByName(const std::string& name);
+    const User* findById(int id) const;
+    void        printAll() const override;
+    int         size() const;
 };

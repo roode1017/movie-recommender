@@ -13,6 +13,14 @@ User* UserManager::findByName(const std::string& name) {
     return nullptr;
 }
 
+const User* UserManager::findById(int id) const {
+    for (const User& u : users) {
+        if (u.getId() == id)
+            return &u;
+    }
+    return nullptr;
+}
+
 void UserManager::printAll() const {
     if (users.empty()) {
         std::cout << "  (등록된 사용자가 없습니다)\n";
