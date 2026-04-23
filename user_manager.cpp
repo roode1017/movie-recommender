@@ -27,7 +27,7 @@ void UserManager::printAll() const {
         return;
     }
     for (const User& u : users)
-        u.display();
+        std::cout << "  " << u << "\n";
 }
 
 int UserManager::size() const {

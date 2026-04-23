@@ -1,1 +1,1 @@
-Hello World
+숭실대학교 C++ Programming  2026년 1학기

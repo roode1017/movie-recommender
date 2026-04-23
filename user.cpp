@@ -22,3 +22,9 @@ void User::display() const {
               << " <" << email << ">"
               << std::endl;
 }
+
+std::ostream& operator<<(std::ostream& os, const User& user) {
+    os << user.id << ". " << user.name
+       << " <" << user.email << ">";
+    return os;
+}
